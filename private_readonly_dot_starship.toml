@@ -1,0 +1,52 @@
+add_newline = false
+
+format = """
+$username\
+$hostname\
+$shlvl\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$terraform\
+$nix_shell\
+$memory_usage\
+$env_var\
+$cmd_duration\
+$custom\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$character"""
+
+[line_break]
+disabled = true
+
+[git_branch]
+style = "bold 89"
+
+[git_status]
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+
+[directory]
+style = "bold 69"
+
+[status]
+disabled = false
+
+[cmd_duration]
+format = "[$duration]($style) "
+
+[custom.flox]
+command = "flox envs --json |jq '.active[].pointer.name' | tr -d '\"' | tr '\n' ' '"  # Muestra los entornos activos en una sola línea
+when = "flox envs --active |grep -vq 'No active environments'"  # Solo se muestra si hay entornos activos
+format = "[$output](green) "
