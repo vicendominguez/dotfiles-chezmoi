@@ -93,8 +93,7 @@ return {
         -- Navega entre opciones con Ctrl+j y Ctrl+k
         ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<C-k>"] = cmp.mapping.select_prev_item(),
-        -- Confirma manualmente con Enter
-        ["<Tab>"] = cmp.mapping.confirm({ select = false }), -- Solo completa si seleccionas explícitamente
+        ["<Tab>"] = cmp.mapping.confirm({ select = true }), -- Solo completa si seleccionas explícitamente
         -- Cierra el menú con Esc
         ["<Esc>"] = cmp.mapping.close(),
       },
@@ -130,3 +129,4 @@ return {
   { "nvim-tree/nvim-tree.lua", config = function() require("nvim-tree").setup() end },
   { "lukas-reineke/indent-blankline.nvim", config = function() require("ibl").setup() end },
 }
+
