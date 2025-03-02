@@ -1,7 +1,4 @@
-__FRESH_BIN_PATH__=$HOME/bin; [[ ! $PATH =~ (^|:)$__FRESH_BIN_PATH__(:|$) ]] && export PATH="$__FRESH_BIN_PATH__:$PATH"; unset __FRESH_BIN_PATH__
-export FRESH_PATH="/home/quasar/.fresh"
-
-# fresh: shell/alias-Linux.sh
+{{ if eq .chezmoi.os "linux" -}}
 
 alias fgrep='fgrep --colour=auto'
 alias grep='grep --colour=auto'
@@ -12,10 +9,9 @@ alias ls='ls --color=auto'
 alias myweather='curl -4 http://wttr.in/'
 alias valencia='curl -4 http://wttr.in/Valencia,Spain'
 
-# fresh: shell/fzf_completions-Linux.sh
-
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
+{{ end -}}
 # fresh: josacar/dotfiles shell/aliases/git.sh
 
 alias ga='git add'
@@ -140,6 +136,7 @@ gls() {
 gpr() {
   TEMP_FILE="$(mktemp "${TMPDIR:-/tmp}/gpr.XXXXXX")"
   echo '+refs/pull/*/head:refs/remotes/origin/pr/*' > "$TEMP_FILE"
+
   git config --get-all remote.origin.fetch | grep -v 'refs/remotes/origin/pr/\*$' >> "$TEMP_FILE"
   git config --unset-all remote.origin.fetch
   while read -r LINE < "$TEMP_FILE"
@@ -273,15 +270,3 @@ gcf() {
   esac
 }
 
-# fresh: shell/starship-Linux.sh
-
-export STARSHIP_CONFIG=~/.starship.toml
-eval "$(starship init bash)"
-
-# fresh: shell/zoxide-Linux.sh
-
-eval "$(zoxide init bash)"
-
-# fresh: shell/forgit.sh
-
-source ~/.fresh/build/forgit/forgit.plugin.sh
