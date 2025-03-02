@@ -1,4 +1,12 @@
 export STARSHIP_CONFIG=~/.starship.toml
+
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
-source ~/.config/forgit/forgit.plugin.sh
+
+if [ -f ~/.config/forgit/forgit.plugin.sh ]; then
+  source ~/.config/forgit/forgit.plugin.sh
+fi
+
+if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
+  source /usr/share/doc/fzf/examples/key-bindings.bash
+fi
