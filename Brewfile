@@ -1,4 +1,3 @@
-{{ if eq .chezmoi.os "darwin" -}}
 # packages and cask 
 brew 'htop'
 brew 'wget'
@@ -22,4 +21,3 @@ cask 'font-3270-nerd-font'
 cask 'font-droid-sans-mono-nerd-font'
 cask 'font-mononoki-nerd-font'
 cask 'font-space-mono-nerd-font'
-{{ end -}}

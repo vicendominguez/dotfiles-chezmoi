@@ -1,18 +1,21 @@
 {{ $sudo := "sudo " -}}
 {{ if eq .chezmoi.username "root" -}}
-{{   $sudo = "" -}}
+{{ $sudo = "" -}}
 {{ end -}}
+
+{{- $apt_file := joinPath .chezmoi.sourceDir "apt-packages" -}}
 
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/bash
 
 set -eufo pipefail
 
-{{ $sudo }} apt install ripgrep 
-
+{{ $sudo }} apt install -y $(cat {{ $apt_file }} | grep -v '^#')
 {{ else if eq .chezmoi.os "darwin" -}}
 
 #!/bin/sh
-brew install ripgrep
+if ! command -v brew >/dev/null 2>&1; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile"
 {{ end -}}
-
