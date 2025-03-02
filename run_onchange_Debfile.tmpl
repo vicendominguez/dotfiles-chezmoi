@@ -3,7 +3,7 @@
 {{ $sudo = "" -}}
 {{ end -}}
 
-{{- $apt_file := joinPath .chezmoi.sourceDir "apt-packages" -}}
+{{- $apt_file := joinPath .chezmoi.sourceDir "Debfile" -}}
 
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/bash
