@@ -12,10 +12,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Cargar los plugins
-require("lazy").setup("plugins")
 require("settings")
 require("mappings")
-
+require("lazy").setup("plugins")
 
 
 
