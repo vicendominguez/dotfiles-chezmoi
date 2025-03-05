@@ -10,7 +10,7 @@
 set -eufo pipefail
 {{ $sudo }} apt install -y $(cat {{ $apt_file }} | grep -v '^#')
 
-if ! command -v zoxide > /dev/null 2>$1; then
+if ! command -v zoxide > /dev/null 2>&1; then
   /bin/bash -c "$(curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh)"
 fi
 
