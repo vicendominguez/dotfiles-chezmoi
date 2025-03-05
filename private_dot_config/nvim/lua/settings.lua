@@ -1,12 +1,52 @@
--- Opciones generales
-vim.o.autowrite = true
-vim.o.number = true
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
-vim.o.expandtab = true
-vim.o.laststatus = 2
-vim.o.splitbelow = true
-vim.o.splitright = true
+vim.opt.autowrite = true
+vim.opt.mouse = a
+vim.opt.showmode = false
+vim.opt.number = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.laststatus = 2
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.updatetime = 100
+vim.schedule(function()
+  vim.opt.clipboard = 'unnamedplus'
+end)
+
+-- Enable break indent
+vim.opt.breakindent = true
+
+-- Save undo history
+vim.opt.undofile = true
+
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- Keep signcolumn on by default
+vim.opt.signcolumn = 'yes'
+
+-- Decrease mapped sequence wait time
+vim.opt.timeoutlen = 300
+
+-- Configure how new splits should be opened
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = 'split'
+
+-- Show which line your cursor is on
+vim.opt.cursorline = true
+
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 10
 
 -- Configuraciones específicas de Go
 vim.g.go_highlight_fields = 1
@@ -17,7 +57,6 @@ vim.g.go_highlight_operators = 1
 vim.g.go_fmt_autosave = 1
 vim.g.go_fmt_command = "goimports"
 vim.g.go_auto_type_info = 1
-vim.o.updatetime = 100
 
 local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -27,3 +66,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
   group = format_sync_grp,
 })
+
+-- vim: ts=2 sts=2 sw=2 et
