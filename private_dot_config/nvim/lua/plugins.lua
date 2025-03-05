@@ -90,12 +90,10 @@ return {
       mapping = {
         -- Abre el menú de autocompletado con Ctrl+Espacio
         ["<C-Space>"] = cmp.mapping.complete(),
-        -- Navega entre opciones con Ctrl+j y Ctrl+k
-        ["<C-j>"] = cmp.mapping.select_next_item(),
-        ["<C-k>"] = cmp.mapping.select_prev_item(),
-        ["<Tab>"] = cmp.mapping.confirm({ select = true }), -- Solo completa si seleccionas explícitamente
-        -- Cierra el menú con Esc
         ["<Esc>"] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm { select = true },
+        ['<Tab>'] = cmp.mapping.select_next_item(),
+        ['<S-Tab>'] = cmp.mapping.select_prev_item(),
       },
 
       -- Comportamiento del autocompletado
