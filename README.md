@@ -1,6 +1,6 @@
-# Chezmoi: Custom `.bashrc` Setup
+# Chezmoi: Custom dotfiles Setup
 
-This repository contains a Chezmoi template to generate a customized `.bashrc` file based on `/etc/skel/.bashrc`. It removes commented lines and automatically sources additional files like `.shell_aliases` and `.shellrc` if they exist.
+This repository contains a Chezmoi template to generate a customized `.zshrc` for darwin and a `.bashrc` file based on `/etc/skel/.bashrc` for Linux. It removes commented lines and automatically sources additional files like `.shell_aliases` and `.shellrc` if they exist.
 
 ## Key Features
 
@@ -12,7 +12,7 @@ This repository contains a Chezmoi template to generate a customized `.bashrc` f
    - If `~/.shellrc` exists, it is also automatically sourced.
 
 3. **Cross-Platform Compatibility**:
-   - The template works on both Linux and macOS -working_on_it- systems.
+   - The template works on both Linux and macOS systems.
 
 ## Repository Structure
 
