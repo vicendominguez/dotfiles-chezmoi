@@ -8,6 +8,10 @@ if type brew &>/dev/null; then
 fi
 autoload -Uz compinit; compinit
 
+if [ -f ~/.shell_aliases ]; then source ~/.shell_aliases; fi
+if [ -f ~/.shellrc ]; then source ~/.shellrc; fi
+
+
 add_host () {
   VPN_INTERFACE=$(ifconfig |grep "inet " -B1 | awk -F ":" '/utun/ {print $1}')
 	GATEWAY_IP=`/sbin/ifconfig ${VPN_INTERFACE} | awk '/inet /{print $2}'`
