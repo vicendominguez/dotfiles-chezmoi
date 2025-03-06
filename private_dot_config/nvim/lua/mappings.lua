@@ -37,7 +37,7 @@ end
 
 map("n", "<leader>gg", lsp_split_right(vim.lsp.buf.definition), { desc = "Go to definition (vsplit right)" })
 map("n", "<leader>gi", lsp_split_right(vim.lsp.buf.implementation), { desc = "Go to implementation (vsplit right)" })
-map("n", "<leader>gR", "<cmd>lua vim.lsp.buf.references({ loclist = false, popup = true })<CR>", { desc = "List references (popup)" })
+map("n", "<leader>gR", "<cmd>lua vim.lsp.buesc = "List references (popup)" })
 
 -- Depuración (si usas DAP con go.nvim)
 map("n", "<leader>ds", ":GoDebug<CR>", { desc = "Start Go debugger" })
@@ -45,6 +45,7 @@ map("n", "<leader>db", ":GoBreakToggle<CR>", { desc = "Toggle breakpoint" })
 
 -- Mappings para FZF
 map("n", "<C-p>", ":FzfLua files<CR>", { silent = true })
+map("n", "<C-l>", ":FzfLua live_grep<CR>", { silent = true })
 map("n", "<leader>f", ":FzfLua grep<CR>", { silent = true })
 map("n", "<leader>g", ":FzfLua git_commits<CR>", { silent = true })
 map("n", "<leader>h", ":FzfLua oldfiles<CR>", { silent = true })
