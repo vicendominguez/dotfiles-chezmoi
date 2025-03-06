@@ -1,0 +1,33 @@
+# code: language=bash
+# shellcheck shell=bash disable=SC2148,SC1091,SC1090
+
+{{ if eq .chezmoi.os "darwin" -}}
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+fi
+autoload -Uz compinit; compinit
+
+add_host () {
+  VPN_INTERFACE=$(ifconfig |grep "inet " -B1 | awk -F ":" '/utun/ {print $1}')
+	GATEWAY_IP=`/sbin/ifconfig ${VPN_INTERFACE} | awk '/inet /{print $2}'`
+  echo "Routing $1 via ${GATEWAY_IP} ..." 
+	host -t A $1 | awk '/has address/ { print $4 }' | xargs -I {} sudo route add -host {} ${GATEWAY_IP}
+}
+
+add_host_to_default_gw () {
+  echo "Routing $1 via default gw ..." 
+	host -t A $1 | awk '/has address/ { print $4 }' | xargs -I {} sudo route add -host {} default
+
+}
+
+source ~/.envrc
+
+. <(magellan completion zsh)
+
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
+{{- end -}}
