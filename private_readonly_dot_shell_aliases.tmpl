@@ -13,6 +13,12 @@ alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 
 {{ else if eq .chezmoi.os "darwin" -}}
+alias fgrep='fgrep --colour=auto'
+alias grep='grep --colour=auto'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -lF'
+alias ls='ls -G'
 
 alias ssmsession='aws ssm start-session --target '
 alias jsonlintall='find . -name "*.json" -exec jsonlint -c -q {} \;'
