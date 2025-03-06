@@ -1,3 +1,5 @@
+{{ if eq .chezmoi.os "linux" -}}
+
 {{- $filtered_bashrc := "" -}}
 
 {{- /* Incluir el contenido de /etc/skel/.bashrc */ -}}
@@ -20,3 +22,4 @@
 
 {{- /* Generar el archivo .bashrc */ -}}
 {{ $filtered_bashrc }}
+{{- end -}}
