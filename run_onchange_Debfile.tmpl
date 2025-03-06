@@ -3,8 +3,8 @@
 {{ $sudo = "" -}}
 {{ end -}}
 
-{{- $apt_file := joinPath .chezmoi.sourceDir "Debfile" -}}
 {{ if eq .chezmoi.os "linux" -}}
+{{- $apt_file := joinPath .chezmoi.sourceDir "Debfile" -}}
 #!/bin/bash
 
 set -eufo pipefail
@@ -14,11 +14,4 @@ if ! command -v zoxide > /dev/null 2>&1; then
   /bin/bash -c "$(curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh)"
 fi
 
-{{ else if eq .chezmoi.os "darwin" -}}
-
-#!/bin/sh
-if ! command -v brew >/dev/null 2>&1; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile"
 {{ end -}}
