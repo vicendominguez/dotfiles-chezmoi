@@ -4,5 +4,5 @@
 if ! command -v brew >/dev/null 2>&1; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
-brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile"
+brew bundle --file="{{ .chezmoi.sourceDir }}/private_dot_config/pkgfiles/Brewfile"
 {{ end -}}

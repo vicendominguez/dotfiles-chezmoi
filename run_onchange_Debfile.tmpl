@@ -4,7 +4,7 @@
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
-{{- $apt_file := joinPath .chezmoi.sourceDir "Debfile" -}}
+{{- $apt_file := joinPath .chezmoi.sourceDir "private_dot_config/pkgfiles/Debfile" -}}
 #!/bin/bash
 
 set -eufo pipefail
