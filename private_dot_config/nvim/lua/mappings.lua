@@ -37,7 +37,7 @@ end
 
 map("n", "<leader>gg", lsp_split_right(vim.lsp.buf.definition), { desc = "Go to definition (vsplit right)" })
 map("n", "<leader>gi", lsp_split_right(vim.lsp.buf.implementation), { desc = "Go to implementation (vsplit right)" })
-map("n", "<leader>gR", "<cmd>lua vim.lsp.buesc = "List references (popup)" })
+map("n", "<leader>gR", "<cmd>lua vim.lsp.buf.references({ loclist = false, popup = true })<CR>", { desc = "List references (popup)" })
 
 -- Depuración (si usas DAP con go.nvim)
 map("n", "<leader>ds", ":GoDebug<CR>", { desc = "Start Go debugger" })
