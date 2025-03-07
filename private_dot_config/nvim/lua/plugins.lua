@@ -8,6 +8,5 @@ return {
   { "numToStr/Comment.nvim", config = function() require("Comment").setup() end },
   { "nvim-tree/nvim-tree.lua", config = function() require("nvim-tree").setup() end },
   { "lukas-reineke/indent-blankline.nvim", config = function() require("ibl").setup() end },
---  { "AndrewRadev/splitjoin.vim" },
 }
 
