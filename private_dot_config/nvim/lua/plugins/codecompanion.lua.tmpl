@@ -1,3 +1,5 @@
+{{ if eq .chezmoi.os "darwin" -}}
+
 return {
  {
    "olimorris/codecompanion.nvim",
@@ -31,3 +33,5 @@ return {
    } 
  },
 }
+
+{{- end -}}
