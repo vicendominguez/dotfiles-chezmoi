@@ -15,6 +15,7 @@ end)
 
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "number"
+vim.o.statuscolumn = "%s %l %r"
 
 -- Enable break indent
 vim.opt.breakindent = true
