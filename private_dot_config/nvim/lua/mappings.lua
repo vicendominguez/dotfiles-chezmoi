@@ -46,6 +46,7 @@ map("n", "<leader>db", ":GoBreakToggle<CR>", { desc = "Toggle breakpoint" })
 -- Mappings para FZF
 map("n", "<C-p>", ":FzfLua files<CR>", { silent = true })
 map("n", "<C-l>", ":FzfLua live_grep<CR>", { silent = true })
+map("n", "<C-f>", ":FzfLua grep_cword<CR>", { silent = true })
 map("n", "<leader>f", ":FzfLua grep<CR>", { silent = true })
 map("n", "<leader>g", ":FzfLua git_commits<CR>", { silent = true })
 map("n", "<leader>h", ":FzfLua oldfiles<CR>", { silent = true })
