@@ -54,3 +54,7 @@ map("n", "<leader>h", ":FzfLua oldfiles<CR>", { silent = true })
 -- Mappings para NvimTree
 map("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
 map("n", "<leader>t", ":NvimTreeFindFile<CR>", { silent = true })
+
+-- Mappings for CodeCompanion
+map("n", "<leader>cc", ":CodeCompanionChat<CR>", { silent = true })
+
