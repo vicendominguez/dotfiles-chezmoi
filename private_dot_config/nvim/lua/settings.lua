@@ -13,6 +13,9 @@ vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
+vim.opt.relativenumber = true
+vim.opt.signcolumn = "number"
+
 -- Enable break indent
 vim.opt.breakindent = true
 
