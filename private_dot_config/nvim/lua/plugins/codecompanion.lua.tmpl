@@ -53,9 +53,9 @@ return {
      adapters = {
        Groq = function()
           -- this is my personal fix to detect the config
-          local groq_api_token = vim.env.GROQ_API_TOKEN
+          local groq_api_token = vim.env.GROQ_API_KEY
           if not groq_api_token then
-            error("Environment variable GROQ_API_TOKEN must be set.")
+            error("Environment variable GROQ_API_KEY must be set.")
           end
           return require("codecompanion.adapters").extend("openai_compatible", {
            env = {
