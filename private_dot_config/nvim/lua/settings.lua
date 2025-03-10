@@ -10,12 +10,11 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.updatetime = 100
 vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
-end)
+vim.opt.clipboard = 'unnamedplus'
 
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "number"
-vim.o.statuscolumn = "%s %l %r"
+vim.o.statuscolumn = "%s%l %r "
 
 -- Enable break indent
 vim.opt.breakindent = true
