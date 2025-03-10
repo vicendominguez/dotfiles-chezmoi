@@ -10,7 +10,8 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.updatetime = 100
 vim.schedule(function()
-vim.opt.clipboard = 'unnamedplus'
+  vim.opt.clipboard = 'unnamedplus'
+end)
 
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "number"
