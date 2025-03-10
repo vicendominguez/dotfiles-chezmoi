@@ -52,10 +52,15 @@ return {
       },
      adapters = {
        Groq = function()
-         return require("codecompanion.adapters").extend("openai_compatible", {
+          -- this is my personal fix to detect the config
+          local groq_api_token = vim.env.GROQ_API_TOKEN
+          if not groq_api_token then
+            error("Environment variable GROQ_API_TOKEN must be set.")
+          end
+          return require("codecompanion.adapters").extend("openai_compatible", {
            env = {
              url = "https://api.groq.com/openai/",
-             api_key =  vim.env.GROQ_API_KEY,
+             api_key = groq_api_token,
              chat_url = "/v1/chat/completions", -- optional: default value, override if different
              models_endpoint = "/v1/models", -- optional: attaches to the end of the URL to form the endpoint to retrieve models
            },
