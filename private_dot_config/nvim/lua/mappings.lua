@@ -44,17 +44,18 @@ map("n", "<leader>ds", ":GoDebug<CR>", { desc = "Start Go debugger" })
 map("n", "<leader>db", ":GoBreakToggle<CR>", { desc = "Toggle breakpoint" })
 
 -- Mappings para FZF
-map("n", "<C-p>", ":FzfLua files<CR>", { silent = true })
+map("n", "<C-p>", ":FzfLua files<CR>", { silent = true, desc = "Open files tree" })
 map("n", "<C-l>", ":FzfLua live_grep<CR>", { silent = true })
 map("n", "<C-f>", ":FzfLua grep_cword<CR>", { silent = true })
 map("n", "<leader>f", ":FzfLua grep<CR>", { silent = true })
 map("n", "<leader>g", ":FzfLua git_commits<CR>", { silent = true })
 map("n", "<leader>h", ":FzfLua oldfiles<CR>", { silent = true })
+map("n", "<C-b>", ":FzfLua buffers<CR>", { desc = "Open buffers tree"})
 
 -- Mappings para NvimTree
 map("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
 map("n", "<leader>t", ":NvimTreeFindFile<CR>", { silent = true })
 
 -- Mappings for CodeCompanion
-map("n", "<leader>cc", ":CodeCompanionChat<CR>", { silent = true })
+map("n", "<leader>cc", ":CodeCompanionChat<CR>", { silent = true, desc = "Open IA CodeCompanionChat" })
 
