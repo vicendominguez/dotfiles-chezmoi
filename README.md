@@ -8,7 +8,7 @@ This repository contains a Chezmoi template to generate a customized `.zshrc` fo
    - The generated `.bashrc` file removes all lines starting with `#` (comments) from `/etc/skel/.bashrc`.
 
 2. **Automatic Loading of Additional Files**:
-   - If `~/.shell_aliases` exists, it is automatically sourced in the `.bashrc`.
+   - If `~/.shell_aliases` exists, it is automatically sourced.
    - If `~/.shellrc` exists, it is also automatically sourced.
 
 3. **Cross-Platform Compatibility**:
