@@ -37,3 +37,4 @@ hooks.location=~/.config/task/hooks
 #include no-color.theme
 
 news.version=2.6.0
+editor=vim
