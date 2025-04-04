@@ -10,7 +10,7 @@ PublishPort=3000:3000
 PublishPort=2222:22
 Environment=USER_UID=1000
 Environment=USER_GID=1000
-HealthCmd='curl -sI localhost:3000 |grep -c "200 OK"'
+HealthCmd='curl -sI localhost:3000 |grep -q "200 OK"'
 Volume=/storage/gitea/:/data
 
 [Service]
