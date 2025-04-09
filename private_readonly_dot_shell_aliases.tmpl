@@ -21,7 +21,7 @@ alias ll='ls -lF'
 alias ls='ls -G'
 
 alias ssmsession='aws ssm start-session --target '
-alias jsonlintall='find . -name "*.json" -exec jsonlint -c -q {} \;'
+alias jsonlintall='jsonvalidate -r'
 alias vim=nvim
 
 aws_sso () {
