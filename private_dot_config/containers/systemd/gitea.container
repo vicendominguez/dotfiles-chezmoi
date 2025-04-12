@@ -1,5 +1,3 @@
-{{ if eq .chezmoi.os "linux" -}}
-
 [Unit]
 Description=Running gitea Service
 
@@ -20,4 +18,4 @@ TimeoutStartSec=300
 [Install]
 WantedBy=default.target
 
-{{ end }}
+

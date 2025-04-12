@@ -1,0 +1,16 @@
+[Unit]
+Description=Running plutobot Service
+
+[Container]
+Image=localhost/plutobot:latest
+ContainerName=plutobot
+Volume=/storage/DOWNLOAD:/data
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+
+
