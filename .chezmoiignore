@@ -1,4 +1,4 @@
 README.md
-{{ if ne .chezmoi.os "linux" }}
+{{ if and (ne .chezmoi.os "linux") (ne .chezmoi.hostname "pluto") }}
 .config/containers
 {{ end }}
