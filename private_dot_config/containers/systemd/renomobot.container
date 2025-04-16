@@ -1,0 +1,18 @@
+[Unit]
+Description=Running renomobot Service
+
+[Container]
+Image=localhost/renomobot:latest
+ContainerName=renomobot
+Volume=/storage/DOWNLOAD/bot:/data
+Secret=gemini_api_key,type=env,target=GEMINI_API_KEY
+Secret=youtube_api_key,type=env,target=YOUTUBE_API_KEY
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+
+
