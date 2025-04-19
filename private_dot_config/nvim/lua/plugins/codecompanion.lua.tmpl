@@ -46,17 +46,17 @@ return {
             })
           end,
           Gemini = function()
-    				return require("codecompanion.adapters").extend("gemini", {
-    					schema = {
-    						model = {
-    							default = "gemini-2.0-flash-exp",
-    						},
-    					},
-    					env = {
-    						api_key = vim.env.GEMINI_API_KEY,
-    					},
-    				})
-    			end,
+            return require("codecompanion.adapters").extend("gemini", {
+              schema = {
+                model = {
+                  default = "gemini-2.0-flash-exp",
+                },
+              },
+              env = {
+                api_key = vim.env.GEMINI_API_KEY,
+              },
+            })
+          end,
         },
       }
    } 
@@ -150,17 +150,17 @@ return {
          })
        end,
        Gemini = function()
-				return require("codecompanion.adapters").extend("gemini", {
-					schema = {
-						model = {
-							default = "gemini-2.0-flash-exp",
-						},
-					},
-					env = {
-						api_key = vim.env.GEMINI_API_KEY,
-					},
-				})
-			end,
+        return require("codecompanion.adapters").extend("gemini", {
+          schema = {
+            model = {
+              default = "gemini-2.0-flash-exp",
+            },
+          },
+          env = {
+            api_key = vim.env.GEMINI_API_KEY,
+          },
+        })
+      end,
      },
    },
  },
