@@ -6,6 +6,9 @@ vim.api.nvim_create_user_command("Q", "q", { bang = true })  -- Soporta Q!
 vim.api.nvim_create_user_command("Qa", "qa", { bang = true }) -- Soporta Qa!
 vim.api.nvim_create_user_command("QA", "qa", { bang = true }) -- Soporta QA!
 
+-- ESC to escape from the :vsplit term://bash
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true,  de:sc = "escape from a vsplit term://bash" })
+
 -- Mappings para Go (usando ray-x/go.nvim)
 -- Mapeos para ray-x/go.nvim
 -- Prefijo: <leader>g para comandos relacionados con Go
