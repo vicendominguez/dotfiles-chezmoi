@@ -60,5 +60,5 @@ map("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
 map("n", "<leader>t", ":NvimTreeFindFile<CR>", { silent = true })
 
 -- Mappings for CodeCompanion
-map("n", "<leader>cc", ":CodeCompanionChat<CR>", { silent = true, desc = "Open IA CodeCompanionChat" })
+map("n", "<leader>xx", ":CodeCompanionChat<CR>", { silent = true, desc = "Open IA CodeCompanionChat" })
 
