@@ -10,8 +10,13 @@ return {
    config = true,
    opts = {
       strategies = {
+        {{ if eq .chezmoi.hostname "GL723J93MH" -}}
+        chat = { adapter = 'copilot' },
+        inline = { adapter = 'copilot' },
+        {{ else -}}
         chat = { adapter = 'ollama' },
         inline = { adapter = 'ollama' },
+        {{ end -}}
         adapters = {
            qwencoder = function()
             return require("codecompanion.adapters").extend("ollama", {
