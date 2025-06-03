@@ -1,5 +1,6 @@
 # packages and cask 
 brew 'htop'
+brew 'btop'
 brew 'wget'
 brew 'git'
 brew 'tree'
