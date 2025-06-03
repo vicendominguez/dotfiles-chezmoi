@@ -24,8 +24,8 @@ return {
     bottom = 5,
   },
   window_close_confirmation = "NeverPrompt",
-  initial_rows = 20,
-  initial_cols = 90,
+  initial_rows = 24,
+  initial_cols = 100,
   -- Performance
   front_end = "WebGpu",
   animation_fps = 60,
