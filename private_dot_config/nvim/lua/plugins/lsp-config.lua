@@ -1,93 +1,75 @@
 return {
   {
-  'neovim/nvim-lspconfig',
-    version = "v1.8.0",
+    'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs and related tools to stdpath for Neovim
-      -- Mason must be loaded before its dependents so we need to set it up here.
-      -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      { 'williamboman/mason.nvim', opts = {}, version = "v1.11.0" },
-      {'williamboman/mason-lspconfig.nvim', version = "v1.32.0"},
+      { 'williamboman/mason.nvim', config = true },
+      'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-      -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Allows extra capabilities provided by nvim-cmp
+      { 'j-hui/fidget.nvim', config = true },
       'hrsh7th/cmp-nvim-lsp',
-    },  
-
+    },
+    
     config = function()
+      -- Get capabilities from nvim-cmp
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      
+      -- Define on_attach function (used by go.lua)
+      _G.on_attach = function(client, bufnr)
+        local opts = { buffer = bufnr, silent = true }
+        
+        -- LSP keymaps (avoiding conflicts with your go.lua mappings)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+        
+        -- Enable inlay hints for Neovim 0.10+
+        if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end
+      end
+      
+      -- Make capabilities global for go.lua
+      _G.capabilities = capabilities
+      
       local servers = {
         lua_ls = {
-            settings = {
-              Lua = {
-                completion = {
-                  callSnippet = 'Replace',
-                },
-                -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                -- diagnostics = { disable = { 'missing-fields' } },
-              },
-            },
-        },
-      }
-  
-        -- Ensure the servers and tools above are installed
-        --
-        -- To check the current status of installed tools and/or manually install
-        -- other tools, you can run
-        --    :Mason
-        --
-        -- You can press `g?` for help in this menu.
-        --
-        -- `mason` had to be setup earlier: to configure its options see the
-        -- `dependencies` table for `nvim-lspconfig` above.
-        --
-        -- You can add other tools here that you want Mason to install
-        -- for you, so that they are available from within Neovim.
-        local ensure_installed = vim.tbl_keys(servers or {})
-        vim.list_extend(ensure_installed, {
-          'stylua', -- Used to format Lua code
-        })
-        require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-  
-        require('mason-lspconfig').setup {
-          ensure_installed = {"lua_ls","gopls"}, 
-          automatic_installation = false,
-        }
-        require'lspconfig'.lua_ls.setup {
-          on_init = function(client)
-            if client.workspace_folders then
-              local path = client.workspace_folders[1].name
-              if path ~= vim.fn.stdpath('config') and (vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc')) then
-                return
-              end
-            end
-        
-            client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-              runtime = {
-                -- Tell the language server which version of Lua you're using
-                -- (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT'
-              },
-              -- Make the server aware of Neovim runtime files
+          settings = {
+            Lua = {
+              completion = { callSnippet = 'Replace' },
+              diagnostics = { globals = { 'vim' } },
               workspace = {
                 checkThirdParty = false,
-                library = {
-                  vim.env.VIMRUNTIME
-                  -- Depending on the usage, you might want to add additional paths here.
-                  -- "${3rd}/luv/library"
-                  -- "${3rd}/busted/library",
-                }
-                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
-                -- library = vim.api.nvim_get_runtime_file("", true)
-              }
-            })
-          end,
-          settings = {
-            Lua = {}
-          }
-        }
+                library = { vim.env.VIMRUNTIME }
+              },
+              telemetry = { enable = false },
+            },
+          },
+        },
+        -- Don't configure gopls here - let go.lua handle it
+      }
+      
+      require('mason-tool-installer').setup {
+        ensure_installed = { 'stylua', 'gofumpt', 'goimports' }
+      }
+      
+      require('mason-lspconfig').setup {
+        ensure_installed = { "lua_ls", "gopls" },
+        automatic_installation = true,
+      }
+      
+      -- Setup servers (excluding gopls)
+      for server_name, server_config in pairs(servers) do
+        local config = vim.tbl_deep_extend('force', {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        }, server_config)
+        
+        require('lspconfig')[server_name].setup(config)
+      end
     end,
   },
 }
