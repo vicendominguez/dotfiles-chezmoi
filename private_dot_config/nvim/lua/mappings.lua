@@ -1,3 +1,6 @@
+-- Set Space as leader key while keeping default \ leader working
+vim.g.mapleader = " "
+
 -- typos
 vim.api.nvim_create_user_command("WQ", "wq", { bang = true }) -- Soporta WQ!
 vim.api.nvim_create_user_command("Wq", "wq", { bang = true }) -- Soporta Wq!
@@ -51,9 +54,33 @@ map("n", "<C-p>", ":FzfLua files<CR>", { silent = true, desc = "Open files tree"
 map("n", "<C-l>", ":FzfLua live_grep<CR>", { silent = true })
 map("n", "<C-f>", ":FzfLua grep_cword<CR>", { silent = true })
 map("n", "<leader>f", ":FzfLua grep<CR>", { silent = true })
-map("n", "<leader>g", ":FzfLua git_commits<CR>", { silent = true })
+map("n", "<leader>fc", ":FzfLua git_commits<CR>", { silent = true, desc = "Git commits" })
 map("n", "<leader>h", ":FzfLua oldfiles<CR>", { silent = true })
 map("n", "<C-b>", ":FzfLua buffers<CR>", { desc = "Open buffers tree"})
+
+-- Search Improvements
+-- Clear search highlighting
+map("n", "<Esc>", ":noh<CR>", { desc = "Clear search highlighting" })
+
+-- Better search and replace - replace word under cursor globally
+map("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", { desc = "Replace word under cursor" })
+
+-- Search and replace in visual selection
+map("v", "<leader>s", ":s/\\%V", { desc = "Replace in visual selection" })
+
+-- Search for visually selected text
+map("v", "*", "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>", { desc = "Search for visual selection forward" })
+map("v", "#", "y?\\V<C-R>=escape(@\",'/\\')<CR><CR>", { desc = "Search for visual selection backward" })
+
+-- Better search navigation (center screen on search)
+map("n", "n", "nzzzv", { desc = "Next search result (centered)" })
+map("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
+
+-- Quick search in current buffer
+map("n", "<leader>/", "/\\c", { desc = "Case insensitive search" })
+
+-- Search and replace with confirmation
+map("n", "<leader>S", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gc<Left><Left><Left>", { desc = "Replace word under cursor with confirmation" })
 
 -- Mappings para NvimTree
 map("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
