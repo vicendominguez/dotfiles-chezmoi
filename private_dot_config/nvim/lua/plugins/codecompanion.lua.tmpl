@@ -154,7 +154,27 @@ return {
           },
         })
       end,
-     },
+        -- because groq is also openai api compliant
+        groq = function()
+          return require("codecompanion.adapters").extend("openai", {
+            env = {
+              api_key = vim.env.GROQ_API_KEY,
+            },
+            name = "Groq",
+            url = "https://api.groq.com/openai/v1/chat/completions",
+            schema = {
+              model = {
+                default = "moonshotai/kimi-k2-instruct",
+              },
+            },
+            max_tokens = {
+              default = 8192,
+            },
+            temperature = {
+              default = 1,
+            },
+          })
+        end,     },
    },
  },
 }
