@@ -40,7 +40,6 @@ return {
       })
 
       local function codecompanion_current_model_name()
-        if vim.g.codecompanion_in_use then
           local status, codecompanion = pcall(require, "codecompanion")
           if status and codecompanion and type(codecompanion.buf_get_chat) == "function" then
             local chat = codecompanion.buf_get_chat(vim.api.nvim_get_current_buf())
@@ -48,7 +47,6 @@ return {
               return chat.settings.model or ""
             end
           end
-        end
         return ""
       end
 
