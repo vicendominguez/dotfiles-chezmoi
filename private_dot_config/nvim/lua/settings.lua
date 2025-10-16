@@ -1,5 +1,5 @@
 vim.opt.autowrite = true
-vim.opt.mouse = a
+vim.opt.mouse = "a"
 vim.opt.showmode = false
 vim.opt.number = true
 vim.opt.tabstop = 2
@@ -34,8 +34,6 @@ vim.opt.signcolumn = 'yes'
 vim.opt.timeoutlen = 300
 
 -- Configure how new splits should be opened
-vim.opt.splitright = true
-vim.opt.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
@@ -51,10 +49,6 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
-
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode

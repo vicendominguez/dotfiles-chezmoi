@@ -9,9 +9,17 @@ return {
     },
 
     opts = {
-       lsp_inlay_hints = { enable = true },
-    -- lsp_keymaps = false,
-    -- other options
+      lsp_cfg = false, -- Don't let go.nvim setup gopls, we handle it in lsp-config.lua
+      lsp_gofumpt = true,
+      lsp_on_attach = function(client, bufnr)
+        -- Use our global on_attach function
+        if _G.on_attach then
+          _G.on_attach(client, bufnr)
+        end
+      end,
+      lsp_inlay_hints = { enable = true },
+      trouble = true,
+      luasnip = true,
     },
 
     config = function(lp, opts)

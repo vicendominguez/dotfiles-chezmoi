@@ -62,16 +62,69 @@ return {
             },
           },
         },
-        -- Don't configure gopls here - let go.lua handle it
+        gopls = {
+          settings = {
+            gopls = {
+              gofumpt = true,
+              codelenses = {
+                gc_details = false,
+                generate = true,
+                regenerate_cgo = true,
+                run_govulncheck = true,
+                test = true,
+                tidy = true,
+                upgrade_dependency = true,
+                vendor = true,
+              },
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+              analyses = {
+                fieldalignment = true,
+                nilness = true,
+                unusedparams = true,
+                unusedwrite = true,
+                useany = true,
+              },
+              usePlaceholders = true,
+              completeUnimported = true,
+              staticcheck = true,
+              directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+              semanticTokens = true,
+            },
+          },
+        },
       }
 
       require('mason-tool-installer').setup {
-        ensure_installed = { 'stylua', 'gofumpt', 'goimports' }
+        ensure_installed = { 
+          'stylua', 
+          'gofumpt', 
+          'goimports',
+          'golines',
+          'gotests',
+          'impl',
+          'delve'
+        }
       }
 
       require('mason-lspconfig').setup {
         ensure_installed = { "lua_ls", "gopls" },
         automatic_installation = true,
+        handlers = {
+          function(server_name)
+            local server = servers[server_name] or {}
+            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            server.on_attach = on_attach
+            require('lspconfig')[server_name].setup(server)
+          end,
+        },
       }
 
     end,
