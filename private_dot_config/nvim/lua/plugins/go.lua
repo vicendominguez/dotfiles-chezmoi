@@ -2,43 +2,28 @@
 return {
   {
     "ray-x/go.nvim",
-    dependencies = {  
+    dependencies = {
       "ray-x/guihua.lua",
       "neovim/nvim-lspconfig",
       "nvim-treesitter/nvim-treesitter",
     },
-    config = function()
-      -- Setup gopls with your existing hints configuration
-      require("lspconfig").gopls.setup({
-        cmd = { 'gopls' },
-        on_attach = _G.on_attach, -- Now defined in lsp-config.lua
-        capabilities = _G.capabilities, -- Now defined in lsp-config.lua
-        settings = {
-          gopls = {
-            gofumpt = true,
-            hints = {
-              assignVariableTypes = true,
-              compositeLiteralFields = true,
-              compositeLiteralTypes = true,
-              constantValues = true,
-              functionTypeParameters = true,
-              parameterNames = true,
-              rangeVariableTypes = true,
-            },
-            analyses = {
-              unusedparams = true,
-              shadow = true,
-            },
-            staticcheck = true,
-          },
-        }
-      })
-      
-      require("go").setup({
-        lsp_inlay_hints = { enable = true },
-        -- Disable go.nvim's LSP setup since we handle it above
-        lsp_cfg = false,
-      })
+
+    opts = {
+       lsp_inlay_hints = { enable = true },
+    -- lsp_keymaps = false,
+    -- other options
+    },
+
+    config = function(lp, opts)
+      require("go").setup(opts)
+      local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+      vim.api.nvim_create_autocmd("BufWritePre", {
+       pattern = "*.go",
+        callback = function()
+        require('go.format').goimports()
+        end,
+        group = format_sync_grp,
+    })
     end,
     event = {"CmdlineEnter"},
     ft = {"go", 'gomod', 'gotmpl'},
