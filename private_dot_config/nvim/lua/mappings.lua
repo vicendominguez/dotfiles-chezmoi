@@ -89,3 +89,7 @@ map("n", "<leader>t", ":NvimTreeFindFile<CR>", { silent = true })
 -- Mappings for CodeCompanion
 map("n", "<leader>xx", ":CodeCompanionChat<CR>", { silent = true, desc = "Open IA CodeCompanionChat" })
 
+-- Map a key to open the GitLab link
+
+map('n', '<leader>gl', '<cmd>lua require("gitlab-line-opener").open_line_in_gitlab()<cr>', { noremap = true, silent = true })
+
