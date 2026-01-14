@@ -103,9 +103,9 @@ return {
       }
 
       require('mason-tool-installer').setup {
-        ensure_installed = { 
-          'stylua', 
-          'gofumpt', 
+        ensure_installed = {
+          'stylua',
+          'gofumpt',
           'goimports',
           'golines',
           'gotests',
@@ -115,7 +115,7 @@ return {
       }
 
       require('mason-lspconfig').setup {
-        ensure_installed = { "lua_ls", "gopls" },
+        ensure_installed = { "lua_ls", "gopls", "solargraph" },
         automatic_installation = true,
         handlers = {
           function(server_name)

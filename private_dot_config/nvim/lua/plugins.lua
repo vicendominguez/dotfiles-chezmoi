@@ -14,6 +14,7 @@ return {
       require("mini.trailspace").setup()
       require("mini.splitjoin").setup()
       require("mini.hipatterns").setup()
+      require("mini.git").setup()
     end,
   },
 }

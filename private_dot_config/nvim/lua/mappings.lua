@@ -49,6 +49,10 @@ map("n", "<leader>gR", "<cmd>lua vim.lsp.buf.references({ loclist = false, popup
 map("n", "<leader>ds", ":GoDebug<CR>", { desc = "Start Go debugger" })
 map("n", "<leader>db", ":GoBreakToggle<CR>", { desc = "Toggle breakpoint" })
 
+-- Git mappings (usando mini.git)
+map("n", "<leader>bl", function() require('mini.git').show_at_cursor() end, { desc = "Git blame at cursor" })
+map("n", "<leader>gD", function() require('mini.git').show_diff_source() end, { desc = "Git Diff (replaces LazyGit)" })
+
 -- Mappings para FZF
 map("n", "<C-p>", ":FzfLua files<CR>", { silent = true, desc = "Open files tree" })
 map("n", "<C-l>", ":FzfLua live_grep<CR>", { silent = true })

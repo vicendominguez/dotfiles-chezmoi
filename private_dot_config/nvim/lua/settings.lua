@@ -27,8 +27,7 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
+-- Keep signcolumn on by default (using "number" to combine with line numbers)
 
 -- Decrease mapped sequence wait time
 vim.opt.timeoutlen = 300
@@ -59,26 +58,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
   end,
-})
-
-------------------------------------
--- Configuraciones específicas de Go
-vim.g.go_highlight_fields = 1
-vim.g.go_highlight_functions = 1
-vim.g.go_highlight_function_calls = 1
-vim.g.go_highlight_extra_types = 1
-vim.g.go_highlight_operators = 1
-vim.g.go_fmt_autosave = 1
-vim.g.go_fmt_command = "goimports"
-vim.g.go_auto_type_info = 1
-
-local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-   require('go.format').goimports()
-  end,
-  group = format_sync_grp,
 })
 
 -- vim: ts=2 sts=2 sw=2 et
