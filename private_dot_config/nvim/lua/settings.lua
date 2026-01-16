@@ -29,8 +29,8 @@ vim.opt.smartcase = true
 
 -- Keep signcolumn on by default (using "number" to combine with line numbers)
 
--- Decrease mapped sequence wait time
-vim.opt.timeoutlen = 300
+-- Mapped sequence wait time
+vim.opt.timeoutlen = 1000
 
 -- Configure how new splits should be opened
 

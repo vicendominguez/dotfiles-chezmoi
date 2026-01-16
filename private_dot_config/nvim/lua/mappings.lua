@@ -1,6 +1,14 @@
 -- Set Space as leader key while keeping default \ leader working
 vim.g.mapleader = " "
 
+-- LSP keymaps (global)
+local map = vim.keymap.set
+map('n', '<C-k>', vim.lsp.buf.signature_help, { desc = "Signature help" })
+map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code action" })
+map('n', '<leader>rn', vim.lsp.buf.rename, { desc = "Rename" })
+map('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show diagnostic" })
+map('n', '<leader>dl', vim.diagnostic.setloclist, { desc = "Diagnostic list" })
+
 -- typos
 vim.api.nvim_create_user_command("WQ", "wq", { bang = true }) -- Soporta WQ!
 vim.api.nvim_create_user_command("Wq", "wq", { bang = true }) -- Soporta Wq!
@@ -15,14 +23,11 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true,  desc = "escape fr
 -- Mappings para Go (usando ray-x/go.nvim)
 -- Mapeos para ray-x/go.nvim
 -- Prefijo: <leader>g para comandos relacionados con Go
-local map = vim.keymap.set
 map("n", "<leader>gr", ":GoRun<CR>", { desc = "Run Go file" }) -- Ejecutar el archivo actual
 map("n", "<leader>gb", ":GoBuild<CR>", { desc = "Build Go file" }) -- Compilar el archivo actual
 map("n", "<leader>gt", ":GoTest<CR>", { desc = "Run all tests in file" }) -- Ejecutar pruebas del archivo
 map("n", "<leader>gT", ":GoTestFunc<CR>", { desc = "Run test under cursor" }) -- Ejecutar la prueba bajo el cursor
 map("n", "<leader>gc", ":GoCoverage<CR>", { desc = "Show test coverage" }) -- Mostrar cobertura de pruebas
-map("n", "<leader>gf", ":GoFmt<CR>", { desc = "Format file with gofmt" }) -- Formatear con gofmt
-map("n", "<leader>gi", ":GoImport<CR>", { desc = "Run goimports" }) -- Ejecutar goimports
 map("n", "<leader>ga", ":GoAddTag<CR>", { desc = "Add struct tags" }) -- Añadir tags a structs
 map("n", "<leader>ge", ":GoIfErr<CR>", { desc = "Generate if err != nil" }) -- Generar bloque if err
 map("n", "<leader>gd", ":GoDoc<CR>", { desc = "Show documentation under cursor" }) -- Mostrar documentación
