@@ -1,7 +1,6 @@
 ripgrep
 neovim
 tmux
-screen
 btop
 wget
 git
@@ -15,3 +14,5 @@ fzf
 xsel
 taskwarrior
 bat
+mise
+
