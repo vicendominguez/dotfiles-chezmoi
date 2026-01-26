@@ -1,6 +1,7 @@
 {{ if eq .chezmoi.os "darwin" -}}
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/mise activate zsh)"
 
 [ -f $HOMEBREW_PREFIX/share/forgit/forgit.plugin.zsh ] && source $HOMEBREW_PREFIX/share/forgit/forgit.plugin.zsh
 
@@ -16,12 +17,12 @@ if [ -f ~/.shellrc ]; then source ~/.shellrc; fi
 add_host () {
   VPN_INTERFACE=$(ifconfig |grep "inet " -B1 | awk -F ":" '/utun/ {print $1}')
 	GATEWAY_IP=`/sbin/ifconfig ${VPN_INTERFACE} | awk '/inet /{print $2}'`
-  echo "Routing $1 via ${GATEWAY_IP} ..." 
+  echo "Routing $1 via ${GATEWAY_IP} ..."
 	host -t A $1 | awk '/has address/ { print $4 }' | xargs -I {} sudo route add -host {} ${GATEWAY_IP}
 }
 
 add_host_to_default_gw () {
-  echo "Routing $1 via default gw ..." 
+  echo "Routing $1 via default gw ..."
 	host -t A $1 | awk '/has address/ { print $4 }' | xargs -I {} sudo route add -host {} default
 
 }
