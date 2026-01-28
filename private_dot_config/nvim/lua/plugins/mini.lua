@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     enabled = true,
     event = { "VeryLazy" },
     version = "*",
@@ -50,37 +50,37 @@ return {
     },
   },
   {
-    "echasnovski/mini.comment",
+    "nvim-mini/mini.comment",
     version = "*",
     opts = {},
     event = { "VeryLazy" },
   },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     version = "*",
     opts = {},
     event = { "VeryLazy" },
   },
   {
-    "echasnovski/mini.trailspace",
+    "nvim-mini/mini.trailspace",
     version = "*",
     opts = {},
     event = { "VeryLazy" },
   },
   {
-    "echasnovski/mini.splitjoin",
+    "nvim-mini/mini.splitjoin",
     version = "*",
     opts = {},
     event = { "VeryLazy" },
   },
   {
-    "echasnovski/mini.hipatterns",
+    "nvim-mini/mini.hipatterns",
     version = "*",
     opts = {},
     event = { "VeryLazy" },
   },
   {
-    "echasnovski/mini.git",
+    "nvim-mini/mini-git",
     version = "*",
     opts = {},
     event = { "VeryLazy" },
