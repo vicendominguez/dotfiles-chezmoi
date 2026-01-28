@@ -1,88 +1,29 @@
 return {
   {
-    "nvim-mini/mini.pairs",
-    enabled = true,
-    event = { "VeryLazy" },
+    "nvim-mini/mini.nvim",
     version = "*",
-    opts = {
-      modes = { insert = true, command = false, terminal = false },
-      mappings = {
-        [")"] = { action = "close", pair = "()", neigh_pattern = "[^\\]." },
-        ["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
-        ["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
-        ["["] = {
-          action = "open",
-          pair = "[]",
-          neigh_pattern = ".[%s%z%)}%]]",
-          register = { cr = false },
+    event = "VeryLazy",
+    config = function()
+      require("mini.pairs").setup({
+        modes = { insert = true, command = false, terminal = false },
+        mappings = {
+          [")"] = { action = "close", pair = "()", neigh_pattern = "[^\\]." },
+          ["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
+          ["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
+          ["["] = { action = "open", pair = "[]", neigh_pattern = ".[%s%z%)}%]]", register = { cr = false } },
+          ["{"] = { action = "open", pair = "{}", neigh_pattern = ".[%s%z%)}%]]", register = { cr = false } },
+          ["("] = { action = "open", pair = "()", neigh_pattern = ".[%s%z%)]", register = { cr = false } },
+          ['"'] = { action = "closeopen", pair = '""', neigh_pattern = "[^%w\\][^%w]", register = { cr = false } },
+          ["'"] = { action = "closeopen", pair = "''", neigh_pattern = "[^%w\\][^%w]", register = { cr = false } },
+          ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^%w\\][^%w]", register = { cr = false } },
         },
-        ["{"] = {
-          action = "open",
-          pair = "{}",
-          neigh_pattern = ".[%s%z%)}%]]",
-          register = { cr = false },
-        },
-        ["("] = {
-          action = "open",
-          pair = "()",
-          neigh_pattern = ".[%s%z%)]",
-          register = { cr = false },
-        },
-        ['"'] = {
-          action = "closeopen",
-          pair = '""',
-          neigh_pattern = "[^%w\\][^%w]",
-          register = { cr = false },
-        },
-        ["'"] = {
-          action = "closeopen",
-          pair = "''",
-          neigh_pattern = "[^%w\\][^%w]",
-          register = { cr = false },
-        },
-        ["`"] = {
-          action = "closeopen",
-          pair = "``",
-          neigh_pattern = "[^%w\\][^%w]",
-          register = { cr = false },
-        },
-      },
-    },
-  },
-  {
-    "nvim-mini/mini.comment",
-    version = "*",
-    opts = {},
-    event = { "VeryLazy" },
-  },
-  {
-    "nvim-mini/mini.surround",
-    version = "*",
-    opts = {},
-    event = { "VeryLazy" },
-  },
-  {
-    "nvim-mini/mini.trailspace",
-    version = "*",
-    opts = {},
-    event = { "VeryLazy" },
-  },
-  {
-    "nvim-mini/mini.splitjoin",
-    version = "*",
-    opts = {},
-    event = { "VeryLazy" },
-  },
-  {
-    "nvim-mini/mini.hipatterns",
-    version = "*",
-    opts = {},
-    event = { "VeryLazy" },
-  },
-  {
-    "nvim-mini/mini-git",
-    version = "*",
-    opts = {},
-    event = { "VeryLazy" },
+      })
+      require("mini.comment").setup()
+      require("mini.surround").setup()
+      require("mini.trailspace").setup()
+      require("mini.splitjoin").setup()
+      require("mini.hipatterns").setup()
+      require("mini.git").setup()
+    end,
   },
 }
