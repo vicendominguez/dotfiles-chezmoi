@@ -1,0 +1,23 @@
+# Ghostty Configuration
+
+# Shell integration
+shell-integration-features = sudo
+
+# Theme
+theme = Kanagawabones
+
+# Appearance
+background-opacity = 0.95
+background-blur-radius = 20
+window-padding-x = 10
+window-padding-y = 10
+
+# Clipboard
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = false
+
+# Split navigation (Vim-style with Ctrl+hjkl)
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+l=goto_split:right
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+j=goto_split:bottom
