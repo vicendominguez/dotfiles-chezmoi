@@ -16,8 +16,9 @@ window-padding-y = 10
 clipboard-trim-trailing-spaces = true
 clipboard-paste-protection = false
 
-# Split navigation (Vim-style with Ctrl+hjkl)
-keybind = ctrl+h=goto_split:left
-keybind = ctrl+l=goto_split:right
-keybind = ctrl+k=goto_split:top
-keybind = ctrl+j=goto_split:bottom
+# Split navigation (Super+hjkl - Cmd on macOS, Windows key on Linux)
+# Avoids conflicts with Ctrl+L (clear screen) and Vim shortcuts
+keybind = super+h=goto_split:left
+keybind = super+l=goto_split:right
+keybind = super+k=goto_split:top
+keybind = super+j=goto_split:bottom
