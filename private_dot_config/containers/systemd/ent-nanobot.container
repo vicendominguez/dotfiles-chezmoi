@@ -1,0 +1,21 @@
+[Unit]
+Description=Plut01 Nanobot Agent
+After=mcp-tools.service
+
+[Install]
+WantedBy=default.target
+
+[Container]
+Image=localhost/local-nanobot:latest
+ContainerName=ent_nanobot
+Exec=gateway
+
+# Storage
+Volume=/storage/ent-nanobot:/root/.nanobot:Z
+Volume=/storage/ent-nanobot/config.json:/root/.nanobot/config.json:ro,Z
+Volume=/run/user/%U/podman/podman.sock:/var/run/docker.sock:Z
+
+[Service]
+# Ensures the service restarts if it fails during the apt-get phase
+Restart=always
+

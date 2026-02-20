@@ -1,0 +1,21 @@
+[Unit]
+Description=Stocker MCP Server
+After=network-online.target
+
+[Container]
+# Nombre de la imagen que construyas a partir de tu Dockerfile
+Image=stocker-mcp:latest
+ContainerName=stocker-mcp
+
+# Mapeo de puertos: HostPort:ContainerPort
+PublishPort=5505:5505
+
+# Pasar argumentos al binario para que escuche en modo HTTP
+Exec=-http :5505
+
+[Service]
+Restart=always
+
+[Install]
+# Esto hace que se levante al arrancar el sistema
+WantedBy=multi-user.target default.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=Contenedor MCP Tools para Plut01_bot
+
+[Container]
+Image=docker.io/library/node:20-alpine
+ContainerName=mcp_tools
+Volume=/storage/ent-nanobot/workspace/scripts:/workspace:Z
+Exec=tail -f /dev/null
+
+[Install]
+WantedBy=default.target
