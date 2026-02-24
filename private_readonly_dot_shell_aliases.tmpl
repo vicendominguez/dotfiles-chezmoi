@@ -31,6 +31,7 @@ aws_sso () {
                 (pro) profile=sso_platform_pro_admin  ;;
                 (prod) profile=sso_platform_pro_admin  ;;
                 (pro_ro) profile=sso_platform_pro_adminro  ;;
+                (sand) profile=sso_sre_sandbox_admin  ;;
                 (*) echo "No profile found bobo!"
                         return 1 ;;
         esac
