@@ -1,0 +1,22 @@
+[Unit]
+Description=ENTBOOK - Starship Logbook System
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=localhost/entbook:latest
+ContainerName=entbook
+AutoUpdate=registry
+PublishPort=9980:9980
+Volume=/storage/entbook/entries:/data/entries:Z
+Environment=PORT=9980
+Environment=GIN_MODE=release
+Environment=DATA_DIR=/data/entries
+Environment=BASE_PATH=/entbook
+
+[Service]
+Restart=always
+TimeoutStartSec=900
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,22 @@
+# /etc/containers/systemd/jellyfin.container
+
+[Unit]
+Description=Jellyfin Media Server
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=docker.io/jellyfin/jellyfin:latest
+ContainerName=jellyfin
+Network=host
+Volume=/storage/jellyfin/config:/config
+Volume=/storage/jellyfin/cache:/cache
+Volume=/storage_backup/z-----:/media:ro
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=multi-user.target default.target

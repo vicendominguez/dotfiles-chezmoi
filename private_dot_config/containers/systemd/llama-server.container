@@ -1,0 +1,19 @@
+[Unit]
+Description=Llama.cpp Server - Gemma 4 E4B
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=ghcr.io/ggml-org/llama.cpp:server
+ContainerName=llama-server
+PublishPort=0.0.0.0:8080:8080
+Volume=/home/quasar/models:/models:ro
+Exec=-m /models/gemma-4-E4B-it-Q4_K_M.gguf --host 0.0.0.0 --port 8080 --threads 4 --ctx-size 4096 --n-predict 512 --jinja
+AutoUpdate=registry
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=120
+
+# [Install] removed - service disabled by default
+# To start manually: systemctl --user start llama-server

@@ -1,0 +1,27 @@
+[Unit]
+Description=Bifrost AI Gateway Proxy
+After=network-online.target
+
+[Container]
+Image=docker.io/maximhq/bifrost:latest
+ContainerName=bifrost
+PublishPort=8080:8080
+Volume=/storage/bifrost/data:/app/data
+Environment=APP_PORT=8080
+Environment=APP_HOST=0.0.0.0
+Environment=LOG_LEVEL=info
+Environment=LOG_STYLE=json
+Secret=openrouter_api_key,type=env,target=OPENROUTER_API_KEY
+UserNS=keep-id:uid=1000,gid=1000
+HealthCmd=curl -sf http://localhost:8080/health || exit 1
+HealthInterval=30s
+HealthRetries=3
+HealthStartPeriod=15s
+
+[Service]
+Restart=always
+RestartSec=5
+TimeoutStartSec=120
+
+[Install]
+WantedBy=default.target
