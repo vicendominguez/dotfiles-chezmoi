@@ -93,7 +93,7 @@ return {
       }
 
       require('mason-lspconfig').setup {
-        ensure_installed = { "lua_ls", "gopls", "solargraph" },
+        ensure_installed = { "lua_ls", "gopls" },
         automatic_installation = true,
         handlers = {
           function(server_name)
