@@ -18,6 +18,7 @@ AddHost=host.containers.internal:host-gateway
 Environment=ZEROCLAW_ALLOW_PUBLIC_BIND=1
 # zc-secrets-injected
 Secret=groq_api_key,type=env,target=GROQ_API_KEY
+Secret=vk_zeroclaw,type=env,target=ZEROCLAW_API_KEY
 Secret=telegram_token_plut01,type=env,target=ZEROCLAW_channels__telegram__bot_token
 
 HealthCmd=curl -sf http://localhost:42617/health || exit 1

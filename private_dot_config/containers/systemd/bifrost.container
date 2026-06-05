@@ -12,8 +12,11 @@ Environment=APP_HOST=0.0.0.0
 Environment=LOG_LEVEL=info
 Environment=LOG_STYLE=json
 Secret=openrouter_api_key,type=env,target=OPENROUTER_API_KEY
+Secret=bifrost_encryption_key,type=env,target=BIFROST_ENCRYPTION_KEY
+Secret=vk_zeroclaw,type=env,target=VK_ZEROCLAW
+Secret=vk_goose,type=env,target=VK_GOOSE
 UserNS=keep-id:uid=1000,gid=1000
-HealthCmd=curl -sf http://localhost:8080/health || exit 1
+HealthCmd=wget -q -T 5 -O /dev/null http://localhost:8080/health
 HealthInterval=30s
 HealthRetries=3
 HealthStartPeriod=15s
