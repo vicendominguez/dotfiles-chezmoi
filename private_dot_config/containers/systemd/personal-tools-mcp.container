@@ -1,0 +1,28 @@
+[Unit]
+Description=Personal Tools MCP (meneame, polymarket, valencia, dgt-cameras, zyxel)
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=localhost/personal-tools-mcp:latest
+ContainerName=personal-tools-mcp
+PublishPort=0.0.0.0:5506:5506
+Environment=MCP_HOST=0.0.0.0
+
+# Zyxel router target (non-secret config); password via Secret below
+Environment=ZYXEL_HOST=http://192.168.10.1
+Environment=ZYXEL_USER=user
+
+Secret=zyxel_password,type=env,target=ZYXEL_PASSWORD
+
+HealthCmd=python -c "import socket,sys; sys.exit(0 if socket.socket().connect_ex(('127.0.0.1',5506))==0 else 1)"
+HealthInterval=30s
+HealthRetries=3
+HealthStartPeriod=15s
+
+[Service]
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
