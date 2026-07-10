@@ -18,6 +18,8 @@ AddHost=host.containers.internal:host-gateway
 Environment=ZEROCLAW_ALLOW_PUBLIC_BIND=1
 # zc-secrets-injected
 Secret=groq_api_key,type=env,target=GROQ_API_KEY
+Secret=groq_api_key,type=env,target=ZEROCLAW_providers__transcription__groq__default__api_key
+Secret=groq_api_key,type=env,target=ZEROCLAW_transcription__api_key
 Secret=vk_zeroclaw,type=env,target=ZEROCLAW_API_KEY
 Secret=telegram_token_plut01,type=env,target=ZEROCLAW_channels__telegram__default__bot_token
 
