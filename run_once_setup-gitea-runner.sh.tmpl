@@ -1,0 +1,49 @@
+{{ if and (eq .chezmoi.os "linux") (eq .chezmoi.hostname "pluto") -}}
+#!/bin/sh
+set -e
+
+RUNNER_DATA="$HOME/gitea-runner-data"
+
+# Create runner data directory
+mkdir -p "$RUNNER_DATA"
+
+# Write runner config
+cat > "$RUNNER_DATA/config.yaml" << YAML
+log:
+  level: info
+
+runner:
+  file: .runner
+  capacity: 1
+  timeout: 3h
+  insecure: false
+  fetch_timeout: 5s
+  fetch_interval: 2s
+
+cache:
+  enabled: false
+
+container:
+  network: host
+  privileged: false
+  docker_host: "-"
+  force_pull: false
+  valid_volumes: []
+
+host:
+  workdir_parent:
+YAML
+
+# Build custom runner image (act_runner + docker-cli)
+cat > /tmp/Dockerfile.gitea-runner << DOCKER
+FROM docker.io/gitea/act_runner:latest
+RUN apk add --no-cache docker-cli
+DOCKER
+
+podman build -t gitea-runner:custom -f /tmp/Dockerfile.gitea-runner /tmp
+rm -f /tmp/Dockerfile.gitea-runner
+
+echo "Gitea runner setup complete."
+echo "To register: podman exec -u git gitea gitea actions generate-runner-token"
+echo "Then set GITEA_RUNNER_REGISTRATION_TOKEN in the quadlet and: systemctl --user daemon-reload && systemctl --user start gitea-runner"
+{{ end -}}

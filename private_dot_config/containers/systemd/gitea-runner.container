@@ -1,0 +1,21 @@
+[Unit]
+Description=Gitea Actions Runner (podman socket, isolated jobs)
+After=gitea.service
+
+[Container]
+Image=localhost/gitea-runner:custom
+ContainerName=gitea-runner
+UserNS=keep-id
+Network=host
+Environment=GITEA_INSTANCE_URL=http://localhost:3000
+Environment=GITEA_RUNNER_NAME=pluto-runner
+Environment=CONFIG_FILE=/data/config.yaml
+Volume=/run/user/1000/podman/podman.sock:/var/run/docker.sock
+Volume=/home/quasar/gitea-runner-data:/data
+PodmanArgs=--workdir /data
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
