@@ -4,7 +4,7 @@ After=network-online.target bifrost.service stocker-mcp.service
 Wants=network-online.target
 
 [Container]
-Image=ghcr.io/zeroclaw-labs/zeroclaw:v0.8.2-debian
+Image=ghcr.io/zeroclaw-labs/zeroclaw:v0.8.3-debian
 ContainerName=zeroclaw
 UserNS=keep-id:uid=65534,gid=65534
 PublishPort=42617:42617
