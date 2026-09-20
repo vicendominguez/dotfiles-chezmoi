@@ -6,7 +6,7 @@ Wants=network-online.target
 [Container]
 Image=localhost/entbook:latest
 ContainerName=entbook
-AutoUpdate=registry
+AutoUpdate=local
 PublishPort=9980:9980
 Volume=/storage/entbook/entries:/data/entries:Z
 Environment=PORT=9980
