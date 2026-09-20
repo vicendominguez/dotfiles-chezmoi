@@ -8,6 +8,7 @@ Image=localhost/personal-tools-mcp:latest
 ContainerName=personal-tools-mcp
 PublishPort=0.0.0.0:5506:5506
 Environment=MCP_HOST=0.0.0.0
+AddHost=host.containers.internal:host-gateway
 
 # Zyxel router target (non-secret config); password via Secret below
 Environment=ZYXEL_HOST=http://192.168.10.1

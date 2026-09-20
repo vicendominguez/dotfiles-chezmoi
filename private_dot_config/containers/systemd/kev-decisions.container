@@ -1,0 +1,55 @@
+# =============================================================================
+# Quadlet rootless para Kev-0.6B (decisiones) en pluto (usuario quasar).
+# Destino: ~/.config/containers/systemd/kev-decisions.container
+#
+# Tras copiarlo:
+#   systemctl --user daemon-reload
+#   systemctl --user start kev-decisions.service
+#   (linger ya está activo para quasar)
+#
+# Layout en /storage:
+#   /storage/kev/build/   -> contexto de build (Containerfile + entrypoint + wrapper)
+#   /storage/kev/models/  -> cache persistente de Hugging Face (HF_HOME)
+#
+# ZeroClaw (contenedor) lo alcanza como http://host.containers.internal:8765
+# igual que hace con bifrost/stocker/personal-tools.
+# =============================================================================
+[Unit]
+Description=Kev-0.6B decision model (CPU) para ZeroClaw
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=localhost/kev-decisions:0.6b-cpu
+ContainerName=kev-decisions
+
+# El servidor bindea 0.0.0.0:8009 dentro; lo publicamos en 8765 del host.
+PublishPort=8765:8009
+
+# Cache del modelo persistente (adapter Kev + Qwen3-0.6B-Base).
+Volume=/storage/kev/models:/models/hf:Z
+
+Environment=HF_HOME=/models/hf
+Environment=OMP_NUM_THREADS=4
+Environment=MKL_NUM_THREADS=4
+Environment=KEV_HOST=0.0.0.0
+Environment=KEV_PORT=8009
+Environment=KEV_RUN=jaredpalmer/kev-0.6b
+
+# Contención acorde a la N100 (4 núcleos; 0.6B + base fp32 -> ~4 GB de holgura).
+PodmanArgs=--cpus=4 --memory=4g --memory-swap=4g
+
+# Healthcheck real (Podman lo aplica al contenedor).
+HealthCmd=curl -sf http://localhost:8009/v1/models || exit 1
+HealthInterval=30s
+HealthRetries=5
+HealthStartPeriod=180s
+
+[Service]
+Restart=on-failure
+RestartSec=10
+# El primer arranque descarga los modelos (~1.2 GB); damos margen.
+TimeoutStartSec=600
+
+[Install]
+WantedBy=default.target
