@@ -22,6 +22,7 @@ Wants=network-online.target
 [Container]
 Image=localhost/kev-decisions:0.6b-cpu
 ContainerName=kev-decisions
+Network=services-net
 
 # El servidor bindea 0.0.0.0:8009 dentro; lo publicamos en 8765 del host.
 PublishPort=8765:8009

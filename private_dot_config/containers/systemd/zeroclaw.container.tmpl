@@ -6,6 +6,7 @@ Wants=network-online.target
 [Container]
 Image=ghcr.io/zeroclaw-labs/zeroclaw:v0.8.5-debian
 ContainerName=zeroclaw
+Network=services-net
 UserNS=keep-id:uid=65534,gid=65534
 PublishPort=42617:42617
 PublishPort=42618:42618
@@ -14,7 +15,7 @@ PublishPort=42618:42618
 Volume=/storage/zeroclaw/data:/zeroclaw-data:Z
 
 # Resolve host services (bifrost :8080, stoker-mcp :5505) from inside the container
-AddHost=host.containers.internal:host-gateway
+AddHost=host.containers.internal:{{ .host_lan_ip }}
 
 Environment=ZEROCLAW_ALLOW_PUBLIC_BIND=1
 # zc-secrets-injected
