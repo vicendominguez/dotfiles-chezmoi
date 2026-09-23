@@ -18,6 +18,7 @@ Volume=/storage/zeroclaw/data:/zeroclaw-data:Z
 AddHost=host.containers.internal:{{ .host_lan_ip }}
 
 Environment=ZEROCLAW_ALLOW_PUBLIC_BIND=1
+Environment=ZEROCLAW_transcription__max_duration_secs=1200
 # zc-secrets-injected
 Secret=groq_api_key,type=env,target=GROQ_API_KEY
 Secret=groq_api_key,type=env,target=ZEROCLAW_providers__transcription__groq__default__api_key
