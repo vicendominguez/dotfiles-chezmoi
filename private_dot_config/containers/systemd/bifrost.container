@@ -5,6 +5,7 @@ After=network-online.target
 [Container]
 Image=docker.io/maximhq/bifrost:latest
 ContainerName=bifrost
+Network=services-net
 PublishPort=8080:8080
 Volume=/storage/bifrost/data:/app/data
 Environment=APP_PORT=8080

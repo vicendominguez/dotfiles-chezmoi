@@ -1,10 +1,15 @@
 [Unit]
 Description=Running plutobot Service
+After=network-online.target bifrost.service
 
 [Container]
 Image=localhost/plutobot:latest
 ContainerName=plutobot
+Network=services-net
 Volume=/storage/DOWNLOAD:/data
+Secret=groq_api_key,type=env,target=GROQ_API_KEY
+Secret=youtube_api_key,type=env,target=YOUTUBE_API_KEY
+Secret=vk_plutobot,type=env,target=OPENROUTER_API_KEY
 
 [Service]
 Restart=always
@@ -12,5 +17,3 @@ TimeoutStartSec=300
 
 [Install]
 WantedBy=default.target
-
-
