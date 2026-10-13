@@ -1,0 +1,24 @@
+[Unit]
+Description=Obscura headless browser (MCP server for web automation/scraping)
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=docker.io/h4ckf0r0day/obscura:latest
+ContainerName=obscura
+# MCP server over HTTP, reachable from the host (and thus from zeroclaw via host.containers.internal:8099)
+# --host 0.0.0.0 is required: the mcp default is 127.0.0.1 which only binds inside the container.
+Exec=mcp --http --host 0.0.0.0 --port 8099 --stealth
+PublishPort=0.0.0.0:8099:8099
+# Named volume (podman-managed, rootless) for cookies/sessions; no /storage perms needed.
+Volume=obscura-data.volume:/data
+Environment=OBSCURA_STORAGE_DIR=/data
+# MCP HTTP requires an auth token (>=32 bytes); stored as a podman secret.
+Secret=obscura_mcp_token,type=env,target=OBSCURA_MCP_TOKEN
+
+[Service]
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
