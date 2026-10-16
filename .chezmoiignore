@@ -2,3 +2,4 @@ README.md
 {{ if and (ne .chezmoi.os "linux") (ne .chezmoi.hostname "pluto") }}
 .config/containers
 {{ end }}
+.config/crush/.bifrost-vk
