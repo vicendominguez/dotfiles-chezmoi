@@ -14,7 +14,7 @@ PublishPort=0.0.0.0:8099:8099
 Volume=obscura-data.volume:/data
 Environment=OBSCURA_STORAGE_DIR=/data
 # MCP HTTP requires an auth token (>=32 bytes); stored as a podman secret.
-Secret=obscura_mcp_token,type=env,target=OBSCURA_MCP_TOKEN
+Secret=OBSCURA_MCP_TOKEN,type=env,target=OBSCURA_MCP_TOKEN
 
 [Service]
 Restart=always
