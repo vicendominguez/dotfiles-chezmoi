@@ -10,6 +10,8 @@ Environment=TZ=Europe/Madrid
 Volume=/storage/homeassistant/config:/config
 Volume=/run/dbus:/run/dbus:ro
 Network=host
+Secret=opencode_token,type=env,target=OPENCODE_TOKEN
+Secret=webhook_secret,type=env,target=ZEROCLAW_WEBHOOK_SECRET
 
 [Service]
 Restart=always
