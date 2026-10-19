@@ -1,0 +1,22 @@
+[Unit]
+Description=WhatsApp MCP Server (Sealjay)
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=localhost:3000/quasar/whatsapp-mcp:latest
+ContainerName=whatsapp-mcp
+AutoUpdate=registry
+PublishPort=0.0.0.0:8770:8770
+Volume=/storage/whatsapp-mcp/store:/home/app/store:Z
+Environment=WHATSAPP_MCP_MEDIA_ROOT=/home/app/store/uploads
+Secret=whatsapp_mcp_token,type=env,target=WHATSAPP_MCP_TOKEN
+Exec=serve -addr 0.0.0.0:8770 -allow-remote
+
+[Service]
+Restart=always
+RestartSec=10
+TimeoutStartSec=180
+
+[Install]
+WantedBy=default.target
