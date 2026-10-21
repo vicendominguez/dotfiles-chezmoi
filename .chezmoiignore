@@ -2,5 +2,4 @@ README.md
 {{ if ne .chezmoi.hostname "pluto" }}
 .config/containers
 {{ end }}
-.config/crush/CRUSH.md
 .config/crush/crushrc
