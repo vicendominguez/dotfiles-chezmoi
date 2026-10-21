@@ -4,7 +4,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Container]
-Image=localhost:3000/quasar/whatsapp-mcp:latest
+Image=pluto:3000/pluto-tech/whatsapp-mcp:latest
 ContainerName=whatsapp-mcp
 AutoUpdate=registry
 PublishPort=0.0.0.0:8770:8770

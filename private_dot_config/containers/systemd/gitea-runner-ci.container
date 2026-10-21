@@ -1,0 +1,22 @@
+[Unit]
+Description=Gitea Actions Runner CI (usa el podman aislado de /storage/ci)
+
+[Container]
+Image=localhost/gitea-runner:custom
+ContainerName=gitea-runner-ci
+UserNS=keep-id
+Network=host
+Environment=GITEA_INSTANCE_URL=http://localhost:3000
+Environment=GITEA_RUNNER_NAME=pluto-ci-runner
+Environment=CONFIG_FILE=/data/config.yaml
+# El podman de CI escucha en 127.0.0.1:2375 (network host, sin TLS: solo loopback).
+# No se monta ningún socket: ni el de quasar ni el de CI.
+Environment=DOCKER_HOST=tcp://127.0.0.1:2375
+Volume=/storage/ci/runner-data:/data:z
+PodmanArgs=--workdir /data
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

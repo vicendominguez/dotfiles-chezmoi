@@ -20,6 +20,8 @@
 {{- $filtered_bashrc = printf "%s\n\n%s" $filtered_bashrc "# Cargar .shellrc si existe" -}}
 {{- $filtered_bashrc = printf "%s\n%s" $filtered_bashrc "if [ -f ~/.shellrc ]; then source ~/.shellrc; fi" -}}
 
+{{- $filtered_bashrc = printf "%s\n%s" $filtered_bashrc "if command -v mise >/dev/null 2>&1; then eval \"$(mise activate bash)\"; fi" -}}
+
 {{- /* Generar el archivo .bashrc */ -}}
 {{ $filtered_bashrc }}
 {{- end -}}
