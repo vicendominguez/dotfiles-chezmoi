@@ -1,0 +1,36 @@
+[Unit]
+Description=ZeroClaw Belen (nutrilen ideas)
+After=network-online.target bifrost.service
+Wants=network-online.target
+
+[Container]
+Image=ghcr.io/zeroclaw-labs/zeroclaw:v0.8.6-debian@sha256:7ef59a63f100dbe29b9f1e0f0c2538a553416e7af1da97163ce7a0099a641c85
+ContainerName=zeroclaw-belen
+Network=services-net
+UserNS=keep-id:uid=65534,gid=65534
+PublishPort=127.0.0.1:42619:42617
+
+Volume=/storage/zeroclaw-belen/data:/zeroclaw-data:Z
+
+AddHost=host.containers.internal:192.168.10.3
+
+Environment=ZEROCLAW_ALLOW_PUBLIC_BIND=1
+# zc-secrets-injected
+Secret=vk_belen,type=env,target=ZEROCLAW_API_KEY
+Secret=vk_belen,type=env,target=ZEROCLAW_providers__models__custom__default__api_key
+Secret=telegram_token_carmen,type=env,target=ZEROCLAW_channels__telegram__default__bot_token
+Secret=groq_api_key,type=env,target=GROQ_API_KEY
+Secret=groq_api_key,type=env,target=ZEROCLAW_providers__transcription__groq__default__api_key
+
+HealthCmd=curl -sf http://localhost:42617/health || exit 1
+HealthInterval=30s
+HealthRetries=3
+HealthStartPeriod=60s
+
+[Service]
+Restart=always
+RestartSec=10
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

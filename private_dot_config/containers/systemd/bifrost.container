@@ -18,6 +18,7 @@ Secret=bifrost_encryption_key,type=env,target=BIFROST_ENCRYPTION_KEY
 Secret=vk_zeroclaw,type=env,target=VK_ZEROCLAW
 Secret=vk_goose,type=env,target=VK_GOOSE
 Secret=vk_plutobot,type=env,target=VK_PLUTOBOT
+Secret=vk_belen,type=env,target=VK_BELEN
 UserNS=keep-id:uid=1000,gid=1000
 HealthCmd=wget -q -T 5 -O /dev/null http://localhost:8080/health
 HealthInterval=30s
