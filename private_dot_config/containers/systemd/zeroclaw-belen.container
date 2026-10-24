@@ -11,6 +11,9 @@ UserNS=keep-id:uid=65534,gid=65534
 PublishPort=127.0.0.1:42619:42617
 
 Volume=/storage/zeroclaw-belen/data:/zeroclaw-data:Z
+Volume=/storage/ideas-belen/web:/ideas-web:Z
+Volume=/storage/ideas-belen/ideas:/ideas-src:Z
+Volume=/storage/ideas-belen/bin:/ideas-bin:Z,ro
 
 AddHost=host.containers.internal:192.168.10.3
 
