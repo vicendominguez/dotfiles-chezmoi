@@ -1,0 +1,30 @@
+[Unit]
+Description=Multica MCP (delegate issues to Multica squads and agents)
+After=network-online.target multica-backend.service
+Wants=multica-backend.service
+
+[Container]
+Image=localhost/multica-mcp:0.1.0
+ContainerName=multica-mcp
+Network=services-net
+
+Environment=MCP_HOST=0.0.0.0
+Environment=MCP_PORT=5507
+Environment=MULTICA_BASE=http://multica-backend:8080
+Environment=MULTICA_APP_URL=http://pluto:3001
+Environment=MULTICA_WORKSPACE_ID=3cb1daae-d282-4eaf-8401-6c7b375bd828
+Environment=MULTICA_WORKSPACE_SLUG=pluto-labs
+
+Secret=multica_zeroclaw_token,type=env,target=MULTICA_TOKEN
+
+HealthCmd=python -c "import socket,sys; sys.exit(0 if socket.socket().connect_ex(('127.0.0.1',5507))==0 else 1)"
+HealthInterval=30s
+HealthRetries=3
+HealthStartPeriod=10s
+
+[Service]
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
