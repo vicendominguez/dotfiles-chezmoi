@@ -4,7 +4,8 @@ After=network-online.target
 Wants=network-online.target
 
 [Container]
-Image=localhost/personal-tools-mcp:latest
+Image=pluto:3000/pluto-tech/personal-tools-mcp:latest
+AutoUpdate=registry
 ContainerName=personal-tools-mcp
 Network=services-net
 PublishPort=0.0.0.0:5506:5506
