@@ -1,0 +1,91 @@
+#!/usr/bin/env python3
+"""Print OpenCode Go quota as one line, for the Herdr tab bar.
+
+Percentage of each limit already consumed: 5h rolling, 7 days, 30 days.
+Falls back to the last cached response when the API is unreachable.
+"""
+import json
+import os
+import subprocess
+import time
+import urllib.request
+
+URL = "https://opencode.ai/zen/go/v1/usage"
+CACHE = os.path.expanduser("~/.cache/oc-quota.json")
+TTL = 120
+
+
+def token():
+    env = os.environ.get("OPENCODE_TOKEN")
+    if env:
+        return env.strip()
+    try:
+        out = subprocess.run(
+            ["podman", "secret", "inspect", "--showsecret", "opencode_token",
+             "--format", "{{.SecretData}}"],
+            capture_output=True, text=True, timeout=10, check=True,
+        )
+        return out.stdout.strip()
+    except (subprocess.SubprocessError, OSError):
+        return ""
+
+
+def cached():
+    try:
+        with open(CACHE) as fh:
+            data = json.load(fh)
+    except (OSError, ValueError):
+        return None, 0.0
+    return data.get("payload"), float(data.get("at", 0))
+
+
+def fetch(tok):
+    req = urllib.request.Request(URL, headers={
+        "Authorization": "Bearer " + tok,
+        "User-Agent": "oc-quota/1.0",
+        "Accept": "application/json",
+    })
+    with urllib.request.urlopen(req, timeout=15) as resp:
+        return json.load(resp)
+
+
+def cache(payload):
+    try:
+        os.makedirs(os.path.dirname(CACHE), exist_ok=True)
+        tmp = CACHE + ".tmp"
+        with open(tmp, "w") as fh:
+            json.dump({"at": time.time(), "payload": payload}, fh)
+        os.replace(tmp, CACHE)
+    except OSError:
+        pass
+
+
+def render(payload):
+    usage = payload.get("usage") or {}
+    parts = []
+    for key, label in (("rolling", "5h"), ("weekly", "7d"), ("monthly", "30d")):
+        win = usage.get(key) or {}
+        pct = win.get("percent")
+        if pct is None:
+            continue
+        parts.append(f"{label} {int(pct)}%")
+    return "Go " + " · ".join(parts) if parts else ""
+
+
+def main():
+    payload, at = cached()
+    if payload is None or time.time() - at > TTL:
+        tok = token()
+        if tok:
+            try:
+                payload = fetch(tok)
+                cache(payload)
+            except Exception:
+                pass
+    line = render(payload) if payload else ""
+    if line:
+        print(line)
+
+
+if __name__ == "__main__":
+    main()

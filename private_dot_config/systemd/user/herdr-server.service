@@ -1,0 +1,14 @@
+[Unit]
+Description=Herdr agent session server
+Documentation=https://herdr.dev/docs/persistence-remote/
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/share/mise/shims/herdr server
+WorkingDirectory=%h
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

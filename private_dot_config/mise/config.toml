@@ -3,4 +3,5 @@ experimental = true
 
 [tools]
 "github:block/goose" = "latest"
+herdr = "latest"
 usage = "latest"

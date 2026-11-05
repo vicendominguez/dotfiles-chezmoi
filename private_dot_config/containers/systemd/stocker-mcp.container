@@ -6,6 +6,7 @@ After=network-online.target
 # Nombre de la imagen que construyas a partir de tu Dockerfile
 Image=stocker-mcp:latest
 ContainerName=stocker-mcp
+Network=services-net
 
 # Forzamos a que publique en todas las IPs del host
 PublishPort=0.0.0.0:5505:5505

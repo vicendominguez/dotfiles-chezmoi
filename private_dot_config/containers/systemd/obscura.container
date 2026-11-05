@@ -6,6 +6,7 @@ Wants=network-online.target
 [Container]
 Image=docker.io/h4ckf0r0day/obscura:latest
 ContainerName=obscura
+Network=services-net
 # MCP server over HTTP, reachable from the host (and thus from zeroclaw via host.containers.internal:8099)
 # --host 0.0.0.0 is required: the mcp default is 127.0.0.1 which only binds inside the container.
 Exec=mcp --http --host 0.0.0.0 --port 8099 --stealth
