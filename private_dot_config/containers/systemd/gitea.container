@@ -2,7 +2,7 @@
 Description=Running gitea Service
 
 [Container]
-Image=docker.gitea.com/gitea:28.1.0
+Image=docker.gitea.com/gitea:28.3.0
 ContainerName=gitea
 Network=services-net
 PublishPort=3000:3000

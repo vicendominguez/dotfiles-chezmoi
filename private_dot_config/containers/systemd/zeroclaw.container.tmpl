@@ -4,7 +4,7 @@ After=network-online.target bifrost.service stocker-mcp.service
 Wants=network-online.target
 
 [Container]
-Image=ghcr.io/zeroclaw-labs/zeroclaw:v0.8.5-debian
+Image=ghcr.io/zeroclaw-labs/zeroclaw:v0.8.7-debian
 ContainerName=zeroclaw
 Network=services-net
 UserNS=keep-id:uid=65534,gid=65534
@@ -27,6 +27,7 @@ Secret=gitea_token,type=env,target=GITEA_TOKEN
 Secret=vk_zeroclaw,type=env,target=ZEROCLAW_API_KEY
 Secret=telegram_token_plut01,type=env,target=ZEROCLAW_channels__telegram__default__bot_token
 Secret=webhook_secret,type=env,target=ZEROCLAW_channels__webhook__default__secret
+Secret=multica_zeroclaw_token,type=env,target=MULTICA_TOKEN
 
 
 HealthCmd=curl -sf http://localhost:42617/health || exit 1

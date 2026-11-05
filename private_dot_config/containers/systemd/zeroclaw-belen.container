@@ -4,7 +4,7 @@ After=network-online.target bifrost.service
 Wants=network-online.target
 
 [Container]
-Image=ghcr.io/zeroclaw-labs/zeroclaw:v0.8.6-debian@sha256:7ef59a63f100dbe29b9f1e0f0c2538a553416e7af1da97163ce7a0099a641c85
+Image=ghcr.io/zeroclaw-labs/zeroclaw:v0.8.7-debian@sha256:d09b17a1e3865092da309ed86fd0c5f288d7b8401a300ca74c95f8a2ebed625e
 ContainerName=zeroclaw-belen
 Network=services-net
 UserNS=keep-id:uid=65534,gid=65534
