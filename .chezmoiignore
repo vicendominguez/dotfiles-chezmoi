@@ -3,3 +3,6 @@ README.md
 .config/containers
 {{ end }}
 .config/crush/crushrc
+{{ if ne .chezmoi.os "darwin" }}
+.config/hammerspoon
+{{ end }}
